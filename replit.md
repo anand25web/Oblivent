@@ -1,8 +1,8 @@
-# Digital Marketing Agency Website
+# Oblivent - Digital Marketing Agency Website
 
 ## Overview
 
-This is a modern, full-stack web application for a digital marketing agency called "Oblivent". The project showcases the agency's services, portfolio, and blog content through a visually appealing, responsive website built with React and TypeScript. The application features a professional design with gradient themes, animations, and comprehensive business functionality including contact forms and newsletter subscriptions.
+Oblivent is a modern digital marketing agency website built as a full-stack application featuring a futuristic design with electric violet, sky blue, and neon lime color scheme. The platform showcases digital marketing services including website design, social media advertising, video production, and branding solutions. The application includes both client-facing pages and backend API functionality for handling contact forms and newsletter subscriptions.
 
 ## User Preferences
 
@@ -11,69 +11,65 @@ Preferred communication style: Simple, everyday language.
 ## System Architecture
 
 ### Frontend Architecture
-- **Framework**: React 18 with TypeScript for type safety and modern development
-- **Routing**: Wouter for lightweight client-side routing
-- **Styling**: Tailwind CSS with custom design system using CSS variables for theming
-- **UI Components**: Radix UI primitives with shadcn/ui component library for consistent, accessible components
-- **State Management**: TanStack Query (React Query) for server state management and caching
-- **Forms**: React Hook Form with Zod validation for type-safe form handling
-- **Build Tool**: Vite for fast development and optimized production builds
+- **Framework**: React 18 with TypeScript for type safety and modern development practices
+- **Routing**: Wouter for lightweight client-side routing instead of React Router
+- **Styling**: Tailwind CSS with shadcn/ui components for consistent design system
+- **UI Components**: Radix UI primitives providing accessible, unstyled components
+- **Animations**: Framer Motion for complex animations with CSS animations for simpler effects
+- **State Management**: TanStack Query for server state management and data fetching
+- **Form Handling**: React Hook Form with Zod validation for robust form management
+- **Theme System**: Custom theme provider supporting dark/light mode with persistence
 
 ### Backend Architecture
-- **Runtime**: Node.js with Express.js web framework
-- **API Pattern**: RESTful API design with JSON responses
-- **Data Validation**: Zod schemas for request/response validation
-- **Storage**: Memory-based storage with interface for future database integration
-- **Development**: Hot module replacement and middleware for development logging
+- **Runtime**: Node.js with Express.js for the web server
+- **API Design**: RESTful API endpoints under `/api` prefix
+- **Request Handling**: Express middleware for JSON parsing, logging, and error handling
+- **Storage**: In-memory storage implementation with interface for future database integration
+- **Schema Validation**: Zod schemas for API request/response validation
 
-### Database Design
-- **ORM**: Drizzle ORM with PostgreSQL dialect configuration
-- **Schema**: Three main entities:
-  - Users (id, username, password) for potential admin functionality
-  - Contacts (contact form submissions with project details and status tracking)
-  - Newsletter Subscriptions (email management with active/inactive status)
-- **Migration**: Drizzle Kit for schema migrations and database management
+### Data Storage Solutions
+- **Database ORM**: Drizzle ORM configured for PostgreSQL with type-safe database operations
+- **Schema Management**: Centralized schema definitions in shared directory for client/server consistency
+- **Tables**: Users, contacts (form submissions), and newsletter subscriptions
+- **Storage Strategy**: Currently using in-memory storage with database-ready interface for easy migration
 
-### Design System
-- **Typography**: Custom font stack with Poppins and Inter fonts
-- **Color Palette**: Brand colors including Electric Violet, Sky Blue, and Neon Lime with dark/light theme support
-- **Components**: Consistent spacing using CSS custom properties and Tailwind utilities
-- **Animations**: Custom CSS animations for floating elements, gradients, and transitions
+### Build and Development
+- **Build Tool**: Vite for fast development and optimized production builds
+- **TypeScript Configuration**: Strict typing with path aliases for clean imports
+- **Development**: Hot module replacement and runtime error overlays for developer experience
+- **Production**: Optimized builds with code splitting and asset optimization
 
-### Development Tools
-- **Type Checking**: Strict TypeScript configuration with path mapping
-- **Code Quality**: ESLint and Prettier integration (implied through project structure)
-- **Development**: Vite dev server with HMR and Replit-specific plugins for cloud development
+### Deployment Configuration
+- **Platform**: Configured for Vercel deployment with serverless functions
+- **Static Assets**: Client build output served from `/dist` directory
+- **API Routes**: Server-side routes handled by Express.js serverless function
+- **Environment**: Production and development environment configurations
 
 ## External Dependencies
 
-### UI and Styling
-- **Radix UI**: Comprehensive set of accessible, unstyled UI primitives
-- **Tailwind CSS**: Utility-first CSS framework for rapid UI development
-- **Lucide React**: Icon library providing consistent iconography
+### UI and Component Libraries
+- **Radix UI**: Complete set of accessible UI primitives (@radix-ui/react-*)
+- **shadcn/ui**: Pre-built component library using Radix UI and Tailwind CSS
+- **Lucide React**: Icon library for consistent iconography
 - **Class Variance Authority**: Utility for creating component variants
 
-### Data and Forms
-- **TanStack Query**: Server state management, caching, and synchronization
-- **React Hook Form**: Performant forms with easy validation
-- **Zod**: TypeScript-first schema validation library
-- **Date-fns**: Modern date utility library
+### Development and Build Tools
+- **Vite**: Frontend build tool and development server
+- **TypeScript**: Static type checking and modern JavaScript features
+- **Tailwind CSS**: Utility-first CSS framework
+- **PostCSS**: CSS processing with autoprefixer
 
-### Development and Build
-- **Vite**: Next-generation frontend build tool
-- **TypeScript**: Static type checking and enhanced developer experience
-- **PostCSS**: CSS processing with Autoprefixer for browser compatibility
+### Backend Dependencies
+- **Express.js**: Web application framework for Node.js
+- **Drizzle ORM**: Type-safe database ORM with PostgreSQL support
+- **@neondatabase/serverless**: PostgreSQL database driver for serverless environments
+- **Zod**: Schema validation library for runtime type checking
 
-### Database and ORM
-- **Drizzle ORM**: Lightweight TypeScript ORM for type-safe database operations
-- **Drizzle Kit**: CLI companion for migrations and schema management
-- **@neondatabase/serverless**: Serverless PostgreSQL driver (ready for Neon database integration)
+### Data Fetching and Forms
+- **TanStack Query**: Server state management and data synchronization
+- **React Hook Form**: Performant form library with minimal re-renders
+- **@hookform/resolvers**: Integration between React Hook Form and validation libraries
 
-### Replit Integration
-- **@replit/vite-plugin-runtime-error-modal**: Development error handling
-- **@replit/vite-plugin-cartographer**: Enhanced development experience in Replit environment
-
-### Additional Utilities
-- **clsx & tailwind-merge**: Conditional className utilities
-- **Embla Carousel**: Carousel/slider functionality for portfolio and testimonials
-- **React Intersection Observer**: Scroll-based animations and lazy loading
+### Deployment and Hosting
+- **Vercel**: Deployment platform with serverless function support
+- **Replit**: Development environment integration for live coding
