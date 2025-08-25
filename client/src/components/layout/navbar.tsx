@@ -4,6 +4,8 @@ import { Menu, X, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/ui/theme-provider";
 import { cn } from "@/lib/utils";
+import LogoLight from "@assets/Add a heading_20250809_115854_0000_1756097199382.png";
+import LogoDark from "@assets/Add a heading_20250809_121205_0000_1756097191995.png";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,13 +27,19 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2" data-testid="logo-link">
-            <div className="w-10 h-10 bg-gradient-to-r from-electric-violet to-sky-blue rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-lg">O</span>
-            </div>
-            <span className="font-poppins font-bold text-xl bg-gradient-to-r from-electric-violet to-sky-blue bg-clip-text text-transparent">
-              Oblivent
-            </span>
+          <Link href="/" className="flex items-center" data-testid="logo-link">
+            <img 
+              src={LogoLight}
+              alt="Oblivent Logo"
+              className="h-8 w-auto dark:hidden transition-opacity duration-300"
+              data-testid="logo-light"
+            />
+            <img 
+              src={LogoDark}
+              alt="Oblivent Logo"
+              className="h-8 w-auto hidden dark:block transition-opacity duration-300"
+              data-testid="logo-dark"
+            />
           </Link>
 
           {/* Desktop Navigation */}
