@@ -224,130 +224,129 @@ export default function Navbar() {
         </Link>
       </div>
 
-      {/* Custom Sidebar Design - Exactly like drawing */}
+      {/* Custom Sidebar Design - Menu button parallel design */}
       {isOpen && (
         <>
           {/* Overlay */}
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden" onClick={() => setIsOpen(false)} />
           
-          {/* Combined Sidebar */}
-          <div className="fixed left-4 top-20 w-64 bg-white/10 backdrop-blur-2xl 
-            border border-white/20 shadow-2xl z-50 md:hidden rounded-2xl p-3 space-y-3 max-h-[calc(100vh-7rem)] overflow-y-auto">
+          {/* Combined Sidebar - aligned with menu button */}
+          <div className="fixed left-6 top-[4.5rem] bg-white/10 backdrop-blur-2xl 
+            border border-white/20 shadow-2xl z-50 md:hidden rounded-2xl p-2 space-y-2 max-h-[calc(100vh-7rem)] overflow-y-auto">
             
             {/* Home Item */}
-            <Link
-              href="/"
-              className={`flex items-center space-x-3 p-3 rounded-xl transition-all ${
-                pathname === '/' ? 'bg-blue-500/30 border border-blue-400/50' : 'hover:bg-white/10'
-              }`}
-              onClick={() => setIsOpen(false)}
-            >
-              <div className={`w-10 h-10 bg-gradient-to-br ${menuItems[0].gradient} rounded-lg 
-                flex items-center justify-center text-white shadow-md flex-shrink-0`}>
-                {menuItems[0].icon}
-              </div>
-              <span className="text-sm font-medium text-white">Home</span>
-            </Link>
-
-            {/* Dashboard - Show only if authenticated and on platform page */}
-            {isAuthenticated && isPlatformPage && (
+            <div className="flex items-center space-x-3">
               <Link
-                href="/dashboard"
-                className="flex items-center space-x-3 p-3 rounded-xl transition-all hover:bg-white/10"
-                onClick={() => setIsOpen(false)}
-              >
-                <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg 
-                  flex items-center justify-center text-white shadow-md flex-shrink-0">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                    <rect x="7" y="7" width="10" height="10" rx="1" ry="1" />
-                  </svg>
-                </div>
-                <span className="text-sm font-medium text-white">Dashboard</span>
-              </Link>
-            )}
-
-            {/* Platform Items */}
-            {menuItems.slice(1, 7).map((item, index) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`flex items-center space-x-3 p-3 rounded-xl transition-all ${
-                  pathname === item.href ? 'bg-blue-500/30 border border-blue-400/50' : 'hover:bg-white/10'
+                href="/"
+                className={`w-12 h-12 bg-gradient-to-br ${menuItems[0].gradient} rounded-xl 
+                  flex items-center justify-center text-white shadow-md flex-shrink-0 transition-all ${
+                  pathname === '/' ? 'ring-2 ring-blue-400/50 scale-105' : 'hover:scale-105'
                 }`}
                 onClick={() => setIsOpen(false)}
               >
-                <div className={`w-10 h-10 bg-gradient-to-br ${item.gradient} rounded-lg 
-                  flex items-center justify-center text-white shadow-md flex-shrink-0`}>
-                  {item.icon}
-                </div>
-                <span className="text-sm font-medium text-white">{item.name}</span>
+                {menuItems[0].icon}
               </Link>
+              <span className="text-white font-bold text-sm whitespace-nowrap">Home</span>
+            </div>
+
+            {/* Dashboard - Show only if authenticated and on platform page */}
+            {isAuthenticated && isPlatformPage && (
+              <div className="flex items-center space-x-3">
+                <Link
+                  href="/dashboard"
+                  className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl 
+                    flex items-center justify-center text-white shadow-md flex-shrink-0 transition-all hover:scale-105"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                    <rect x="7" y="7" width="10" height="10" rx="1" ry="1" />
+                  </svg>
+                </Link>
+                <span className="text-white font-bold text-sm whitespace-nowrap">Dashboard</span>
+              </div>
+            )}
+
+            {/* Platform Items */}
+            {menuItems.slice(1, 7).map((item) => (
+              <div key={item.name} className="flex items-center space-x-3">
+                <Link
+                  href={item.href}
+                  className={`w-12 h-12 bg-gradient-to-br ${item.gradient} rounded-xl 
+                    flex items-center justify-center text-white shadow-md flex-shrink-0 transition-all ${
+                    pathname === item.href ? 'ring-2 ring-blue-400/50 scale-105' : 'hover:scale-105'
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.icon}
+                </Link>
+                <span className="text-white font-bold text-sm whitespace-nowrap">{item.name}</span>
+              </div>
             ))}
 
             {/* Auth Items */}
             {isAuthenticated ? (
               <>
-                <Link
-                  href="/profile"
-                  className="flex items-center space-x-3 p-3 rounded-xl transition-all hover:bg-white/10"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg 
-                    flex items-center justify-center text-white shadow-md flex-shrink-0">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <div className="flex items-center space-x-3">
+                  <Link
+                    href="/profile"
+                    className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl 
+                      flex items-center justify-center text-white shadow-md flex-shrink-0 transition-all hover:scale-105"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
                       <circle cx="12" cy="7" r="4" />
                     </svg>
-                  </div>
-                  <span className="text-sm font-medium text-white">Profile</span>
-                </Link>
-                <button className="flex items-center space-x-3 p-3 rounded-xl transition-all hover:bg-white/10 w-full text-left">
-                  <div className="w-10 h-10 bg-gradient-to-br from-red-400 to-red-600 rounded-lg 
-                    flex items-center justify-center text-white shadow-md flex-shrink-0">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  </Link>
+                  <span className="text-white font-bold text-sm whitespace-nowrap">Profile</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <button className="w-12 h-12 bg-gradient-to-br from-red-400 to-red-600 rounded-xl 
+                    flex items-center justify-center text-white shadow-md flex-shrink-0 transition-all hover:scale-105">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
                       <polyline points="16,17 21,12 16,7" />
                       <line x1="21" y1="12" x2="9" y2="12" />
                     </svg>
-                  </div>
-                  <span className="text-sm font-medium text-white">Logout</span>
-                </button>
+                  </button>
+                  <span className="text-white font-bold text-sm whitespace-nowrap">Logout</span>
+                </div>
               </>
             ) : (
               <>
-                <Link
-                  href="/auth/login"
-                  className="flex items-center space-x-3 p-3 rounded-xl transition-all hover:bg-white/10"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg 
-                    flex items-center justify-center text-white shadow-md flex-shrink-0">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <div className="flex items-center space-x-3">
+                  <Link
+                    href="/auth/login"
+                    className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl 
+                      flex items-center justify-center text-white shadow-md flex-shrink-0 transition-all hover:scale-105"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" />
                       <polyline points="10,17 15,12 10,7" />
                       <line x1="15" y1="12" x2="3" y2="12" />
                     </svg>
-                  </div>
-                  <span className="text-sm font-medium text-white">Login</span>
-                </Link>
+                  </Link>
+                  <span className="text-white font-bold text-sm whitespace-nowrap">Login</span>
+                </div>
                 
-                <Link
-                  href="/auth/signup"
-                  className="flex items-center space-x-3 p-3 rounded-xl transition-all hover:bg-white/10"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-lg 
-                    flex items-center justify-center text-white shadow-md flex-shrink-0">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <div className="flex items-center space-x-3">
+                  <Link
+                    href="/auth/signup"
+                    className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-xl 
+                      flex items-center justify-center text-white shadow-md flex-shrink-0 transition-all hover:scale-105"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
                       <circle cx="9" cy="7" r="4" />
                       <line x1="19" y1="8" x2="19" y2="14" />
                       <line x1="22" y1="11" x2="16" y2="11" />
                     </svg>
-                  </div>
-                  <span className="text-sm font-medium text-white">Sign Up</span>
-                </Link>
+                  </Link>
+                  <span className="text-white font-bold text-sm whitespace-nowrap">Sign Up</span>
+                </div>
               </>
             )}
           </div>
