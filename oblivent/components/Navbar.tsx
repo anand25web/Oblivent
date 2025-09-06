@@ -224,166 +224,170 @@ export default function Navbar() {
         </Link>
       </div>
 
-      {/* Compact Left Sidebar */}
+      {/* Custom Sidebar Design - Exactly like drawing */}
       {isOpen && (
         <>
           {/* Overlay */}
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden" onClick={() => setIsOpen(false)} />
           
-          {/* Compact Left Sidebar */}
-          <div className="fixed left-4 top-20 w-64 max-h-[calc(100vh-6rem)] bg-white/10 backdrop-blur-2xl 
-            border border-white/20 shadow-2xl z-50 md:hidden rounded-2xl overflow-hidden">
+          {/* Icon Column - Left boundary */}
+          <div className="fixed left-4 top-20 w-16 bg-white/10 backdrop-blur-2xl 
+            border border-white/20 shadow-2xl z-50 md:hidden rounded-2xl p-2 space-y-2 max-h-[calc(100vh-7rem)] overflow-y-auto">
             
-            {/* Header with notification and search icons */}
-            <div className="flex items-center justify-end p-4 space-x-3">
-              <button className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center 
-                text-white hover:bg-white/30 transition-all">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9" />
-                  <path d="M13.73 21a2 2 0 01-3.46 0" />
-                </svg>
-              </button>
-              <button className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center 
-                text-white hover:bg-white/30 transition-all">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="M21 21l-4.35-4.35" />
-                </svg>
-              </button>
-            </div>
-            
-            {/* Menu Items - Scrollable */}
-            <div className="px-4 pb-4 space-y-1 max-h-[60vh] overflow-y-auto">
-              {/* Home Item */}
+            {/* Home Icon */}
+            <Link
+              href="/"
+              className={`w-12 h-12 bg-gradient-to-br ${menuItems[0].gradient} rounded-xl 
+                flex items-center justify-center text-white shadow-md
+                hover:scale-105 transition-transform ${
+                pathname === '/' ? 'ring-2 ring-blue-400' : ''
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              {menuItems[0].icon}
+            </Link>
+
+            {/* Dashboard - Show only if authenticated and on platform page */}
+            {isAuthenticated && isPlatformPage && (
               <Link
-                href="/"
-                className={`flex items-center space-x-3 p-2 rounded-xl transition-all group ${
-                  pathname === '/' ? 'bg-blue-500/30 border border-blue-400/50' : 'hover:bg-white/10'
+                href="/dashboard"
+                className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl 
+                  flex items-center justify-center text-white shadow-md
+                  hover:scale-105 transition-transform"
+                onClick={() => setIsOpen(false)}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                  <rect x="7" y="7" width="10" height="10" rx="1" ry="1" />
+                </svg>
+              </Link>
+            )}
+
+            {/* Platform Icons */}
+            {menuItems.slice(1, 7).map((item, index) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`w-12 h-12 bg-gradient-to-br ${item.gradient} rounded-xl 
+                  flex items-center justify-center text-white shadow-md
+                  hover:scale-105 transition-transform ${
+                  pathname === item.href ? 'ring-2 ring-blue-400' : ''
                 }`}
                 onClick={() => setIsOpen(false)}
               >
-                <div className={`w-10 h-10 bg-gradient-to-br ${menuItems[0].gradient} rounded-xl 
-                  flex items-center justify-center text-white shadow-md
-                  group-hover:scale-105 transition-transform`}>
-                  {menuItems[0].icon}
-                </div>
-                <span className="text-sm font-medium text-white">
-                  {menuItems[0].name}
-                </span>
+                {item.icon}
               </Link>
+            ))}
 
-              {/* Dashboard - Show only if authenticated and on platform page */}
-              {isAuthenticated && isPlatformPage && (
+            {/* Auth Icons */}
+            {isAuthenticated ? (
+              <>
                 <Link
-                  href="/dashboard"
-                  className="flex items-center space-x-3 p-2 rounded-xl transition-all group hover:bg-white/10"
+                  href="/profile"
+                  className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl 
+                    flex items-center justify-center text-white shadow-md
+                    hover:scale-105 transition-transform"
                   onClick={() => setIsOpen(false)}
                 >
-                  <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl 
-                    flex items-center justify-center text-white shadow-md
-                    group-hover:scale-105 transition-transform">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                      <rect x="7" y="7" width="10" height="10" rx="1" ry="1" />
-                    </svg>
-                  </div>
-                  <span className="text-sm font-medium text-white">
-                    Dashboard
-                  </span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
                 </Link>
-              )}
-
-              {/* Rest of Menu Items */}
-              {menuItems.slice(1, 7).map((item, index) => (
+                <button className="w-12 h-12 bg-gradient-to-br from-red-400 to-red-600 rounded-xl 
+                  flex items-center justify-center text-white shadow-md
+                  hover:scale-105 transition-transform">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+                    <polyline points="16,17 21,12 16,7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                  </svg>
+                </button>
+              </>
+            ) : (
+              <>
                 <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`flex items-center space-x-3 p-2 rounded-xl transition-all group ${
-                    pathname === item.href ? 'bg-blue-500/30 border border-blue-400/50' : 'hover:bg-white/10'
-                  }`}
+                  href="/auth/login"
+                  className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl 
+                    flex items-center justify-center text-white shadow-md
+                    hover:scale-105 transition-transform"
                   onClick={() => setIsOpen(false)}
                 >
-                  <div className={`w-10 h-10 bg-gradient-to-br ${item.gradient} rounded-xl 
-                    flex items-center justify-center text-white shadow-md
-                    group-hover:scale-105 transition-transform`}>
-                    {item.icon}
-                  </div>
-                  <span className="text-sm font-medium text-white">
-                    {item.name}
-                  </span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" />
+                    <polyline points="10,17 15,12 10,7" />
+                    <line x1="15" y1="12" x2="3" y2="12" />
+                  </svg>
                 </Link>
-              ))}
-
-              {/* Auth Items - Same style as other menu items */}
-              {isAuthenticated ? (
-                <>
-                  <Link
-                    href="/profile"
-                    className="flex items-center space-x-3 p-2 rounded-xl transition-all group hover:bg-white/10"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl 
-                      flex items-center justify-center text-white shadow-md
-                      group-hover:scale-105 transition-transform">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-                        <circle cx="12" cy="7" r="4" />
-                      </svg>
-                    </div>
-                    <span className="text-sm font-medium text-white">Profile</span>
-                  </Link>
-                  <button className="w-full flex items-center space-x-3 p-2 rounded-xl transition-all group hover:bg-white/10">
-                    <div className="w-10 h-10 bg-gradient-to-br from-red-400 to-red-600 rounded-xl 
-                      flex items-center justify-center text-white shadow-md
-                      group-hover:scale-105 transition-transform">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
-                        <polyline points="16,17 21,12 16,7" />
-                        <line x1="21" y1="12" x2="9" y2="12" />
-                      </svg>
-                    </div>
-                    <span className="text-sm font-medium text-white">Logout</span>
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link
-                    href="/auth/login"
-                    className="flex items-center space-x-3 p-2 rounded-xl transition-all group hover:bg-white/10"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl 
-                      flex items-center justify-center text-white shadow-md
-                      group-hover:scale-105 transition-transform">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" />
-                        <polyline points="10,17 15,12 10,7" />
-                        <line x1="15" y1="12" x2="3" y2="12" />
-                      </svg>
-                    </div>
-                    <span className="text-sm font-medium text-white">Login</span>
-                  </Link>
-                  
-                  <Link
-                    href="/auth/signup"
-                    className="flex items-center space-x-3 p-2 rounded-xl transition-all group hover:bg-white/10"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-xl 
-                      flex items-center justify-center text-white shadow-md
-                      group-hover:scale-105 transition-transform">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
-                        <circle cx="9" cy="7" r="4" />
-                        <line x1="19" y1="8" x2="19" y2="14" />
-                        <line x1="22" y1="11" x2="16" y2="11" />
-                      </svg>
-                    </div>
-                    <span className="text-sm font-medium text-white">Sign Up</span>
-                  </Link>
-                </>
-              )}
+                
+                <Link
+                  href="/auth/signup"
+                  className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-xl 
+                    flex items-center justify-center text-white shadow-md
+                    hover:scale-105 transition-transform"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <line x1="19" y1="8" x2="19" y2="14" />
+                    <line x1="22" y1="11" x2="16" y2="11" />
+                  </svg>
+                </Link>
+              </>
+            )}
+          </div>
+          
+          {/* Text Labels - Right boundary */}
+          <div className="fixed left-24 top-20 w-48 bg-white/10 backdrop-blur-2xl 
+            border border-white/20 shadow-2xl z-50 md:hidden rounded-2xl p-4 space-y-2 max-h-[calc(100vh-7rem)] overflow-y-auto">
+            
+            {/* Home Text */}
+            <div className={`p-2 rounded-xl transition-all ${
+              pathname === '/' ? 'bg-blue-500/30 border border-blue-400/50' : 'hover:bg-white/10'
+            }`}>
+              <span className="text-sm font-medium text-white">Home</span>
             </div>
+
+            {/* Dashboard Text - Show only if authenticated and on platform page */}
+            {isAuthenticated && isPlatformPage && (
+              <div className="p-2 rounded-xl transition-all hover:bg-white/10">
+                <span className="text-sm font-medium text-white">Dashboard</span>
+              </div>
+            )}
+
+            {/* Platform Text Labels */}
+            {menuItems.slice(1, 7).map((item, index) => (
+              <div 
+                key={item.name}
+                className={`p-2 rounded-xl transition-all ${
+                  pathname === item.href ? 'bg-blue-500/30 border border-blue-400/50' : 'hover:bg-white/10'
+                }`}
+              >
+                <span className="text-sm font-medium text-white">{item.name}</span>
+              </div>
+            ))}
+
+            {/* Auth Text Labels */}
+            {isAuthenticated ? (
+              <>
+                <div className="p-2 rounded-xl transition-all hover:bg-white/10">
+                  <span className="text-sm font-medium text-white">Profile</span>
+                </div>
+                <div className="p-2 rounded-xl transition-all hover:bg-white/10">
+                  <span className="text-sm font-medium text-white">Logout</span>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="p-2 rounded-xl transition-all hover:bg-white/10">
+                  <span className="text-sm font-medium text-white">Login</span>
+                </div>
+                <div className="p-2 rounded-xl transition-all hover:bg-white/10">
+                  <span className="text-sm font-medium text-white">Sign Up</span>
+                </div>
+              </>
+            )}
           </div>
         </>
       )}
