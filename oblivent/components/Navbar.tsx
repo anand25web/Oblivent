@@ -220,9 +220,10 @@ export default function Navbar() {
           <Image 
             src="/oblivent-logo-new.png" 
             alt="Oblivent Logo" 
-            width={36}
+            width={144}
             height={36}
             className="h-9 w-auto"
+            style={{ width: 'auto', height: '36px' }}
           />
         </Link>
       </div>
