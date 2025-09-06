@@ -2,15 +2,23 @@
 
 import { useState } from "react";
 import Link from "next/link";
-// Using SVG icons instead of lucide-react for now
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  
+  // Mock authentication state - you can replace with real auth logic
+  const isAuthenticated = false;
+  
+  // Check if user is on a platform page
+  const isPlatformPage = pathname.startsWith('/platforms/');
 
   const menuItems = [
     { 
       name: "Home", 
-      href: "/", 
+      href: "/",
+      gradient: "from-blue-400 to-blue-600",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
@@ -19,19 +27,97 @@ export default function Navbar() {
       )
     },
     { 
-      name: "Platforms", 
-      href: "/platforms", 
+      name: "E-Learning", 
+      href: "/platforms/elearning",
+      gradient: "from-emerald-400 to-cyan-500",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" />
+          <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z" />
+        </svg>
+      )
+    },
+    { 
+      name: "Digital Marketing Agency", 
+      href: "/platforms/agency",
+      gradient: "from-red-400 to-pink-500",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+      )
+    },
+    { 
+      name: "Test E-Commerce", 
+      href: "/platforms/mart",
+      gradient: "from-orange-400 to-red-500",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="9" cy="21" r="1" />
+          <circle cx="20" cy="21" r="1" />
+          <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" />
+        </svg>
+      )
+    },
+    { 
+      name: "Broker Dabba Trading", 
+      href: "/platforms/software",
+      gradient: "from-blue-400 to-indigo-500",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="12" y1="1" x2="12" y2="23" />
+          <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+        </svg>
+      )
+    },
+    { 
+      name: "Useful Apps & Websites", 
+      href: "/tools",
+      gradient: "from-purple-400 to-blue-500",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-          <line x1="9" y1="9" x2="15" y2="9" />
-          <line x1="9" y1="15" x2="15" y2="15" />
+          <rect x="7" y="8" width="10" height="8" rx="1" ry="1" />
+        </svg>
+      )
+    },
+    { 
+      name: "Oblivent Mart", 
+      href: "/mart",
+      gradient: "from-green-400 to-emerald-500",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <path d="M16 10a4 4 0 01-8 0" />
+        </svg>
+      )
+    },
+    { 
+      name: "AI Tools", 
+      href: "/ai-tools",
+      gradient: "from-violet-400 to-purple-600",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        </svg>
+      )
+    },
+    { 
+      name: "Books", 
+      href: "/books",
+      gradient: "from-indigo-400 to-blue-600",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
         </svg>
       )
     },
     { 
       name: "About", 
-      href: "/about", 
+      href: "/about",
+      gradient: "from-gray-400 to-gray-600",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="10" />
@@ -42,7 +128,8 @@ export default function Navbar() {
     },
     { 
       name: "Contact", 
-      href: "/contact", 
+      href: "/contact",
+      gradient: "from-pink-400 to-rose-500",
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
@@ -58,18 +145,28 @@ export default function Navbar() {
         border border-blue-800/30 shadow-lg rounded-2xl 
         px-6 py-3 flex items-center justify-between">
         
-        {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2">
-          <img 
-            src="/oblivent-logo-new.png" 
-            alt="Oblivent Logo" 
-            className="h-9 w-auto"
-          />
-        </Link>
+        {/* Mobile Menu Button - Left Side */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden p-2 text-white hover:bg-blue-700/50 rounded-xl transition-all"
+        >
+          {isOpen ? (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+              <polyline points="9,22 9,12 15,12 15,22" />
+            </svg>
+          ) : (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          )}
+        </button>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-8 text-white font-medium">
-          {menuItems.map((item) => (
+          {menuItems.slice(0, 4).map((item) => (
             <Link
               key={item.name}
               href={item.href}
@@ -81,123 +178,214 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Right Side (Login/Signup or Profile/Logout) */}
+        {/* Desktop Auth Buttons */}
         <div className="hidden md:flex space-x-4">
-          <Link
-            href="/auth/login"
-            className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 
-              text-white font-semibold transition-all"
-          >
-            Login
-          </Link>
-          <Link
-            href="/auth/signup"
-            className="px-4 py-2 rounded-xl bg-white/20 hover:bg-white/30 
-              text-white font-semibold transition-all"
-          >
-            Signup
-          </Link>
+          {isAuthenticated ? (
+            <>
+              <Link
+                href="/profile"
+                className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 
+                  text-white font-semibold transition-all"
+              >
+                Profile
+              </Link>
+              <button className="px-4 py-2 rounded-xl bg-white/20 hover:bg-white/30 
+                text-white font-semibold transition-all">
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/auth/login"
+                className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 
+                  text-white font-semibold transition-all"
+              >
+                Login
+              </Link>
+              <Link
+                href="/auth/signup"
+                className="px-4 py-2 rounded-xl bg-white/20 hover:bg-white/30 
+                  text-white font-semibold transition-all"
+              >
+                Signup
+              </Link>
+            </>
+          )}
         </div>
 
-        {/* Mobile Hamburger */}
-        <button
-          className="md:hidden text-white"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? (
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M18 6L6 18" />
-              <path d="M6 6l12 12" />
-            </svg>
-          ) : (
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4 12h16" />
-              <path d="M4 6h16" />
-              <path d="M4 18h16" />
-            </svg>
-          )}
-        </button>
+        {/* Logo - Right Side */}
+        <Link href="/" className="flex items-center space-x-2">
+          <img 
+            src="/oblivent-logo-new.png" 
+            alt="Oblivent Logo" 
+            className="h-9 w-auto"
+          />
+        </Link>
       </div>
 
-      {/* Mobile Menu Sidebar - Right Side */}
+      {/* Premium Left Sidebar - Exactly like the attached image */}
       {isOpen && (
         <>
           {/* Overlay */}
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden" onClick={() => setIsOpen(false)} />
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden" onClick={() => setIsOpen(false)} />
           
-          {/* Right Sidebar */}
-          <div className="fixed right-0 top-0 h-full w-80 bg-white shadow-2xl z-50 md:hidden">
-            {/* Header */}
-            <div className="p-6 border-b border-gray-200">
-              <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold text-gray-800">Menu</h2>
-                <button 
-                  onClick={() => setIsOpen(false)}
-                  className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
-                >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M18 6L6 18" />
-                    <path d="M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
+          {/* Left Premium Sidebar */}
+          <div className="fixed left-6 top-6 bottom-6 w-80 bg-white/10 backdrop-blur-2xl 
+            border border-white/20 shadow-2xl z-50 md:hidden rounded-3xl overflow-hidden">
+            
+            {/* Header with notification and search icons */}
+            <div className="flex items-center justify-end p-6 space-x-4">
+              <button className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center 
+                text-white hover:bg-white/30 transition-all">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9" />
+                  <path d="M13.73 21a2 2 0 01-3.46 0" />
+                </svg>
+              </button>
+              <button className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center 
+                text-white hover:bg-white/30 transition-all">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="M21 21l-4.35-4.35" />
+                </svg>
+              </button>
             </div>
             
             {/* Menu Items */}
-            <div className="flex-1 p-6 space-y-1">
-              {menuItems.map((item, index) => (
+            <div className="px-6 pb-6 space-y-2 max-h-[70vh] overflow-y-auto">
+              {/* Home Item */}
+              <Link
+                href="/"
+                className={`flex items-center space-x-4 p-3 rounded-2xl transition-all group ${
+                  pathname === '/' ? 'bg-blue-500/30 border border-blue-400/50' : 'hover:bg-white/10'
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                <div className={`w-12 h-12 bg-gradient-to-br ${menuItems[0].gradient} rounded-2xl 
+                  flex items-center justify-center text-white shadow-lg
+                  group-hover:scale-110 transition-transform`}>
+                  {menuItems[0].icon}
+                </div>
+                <span className="text-lg font-medium text-white">
+                  {menuItems[0].name}
+                </span>
+              </Link>
+
+              {/* Dashboard - Show only if authenticated and on platform page */}
+              {isAuthenticated && isPlatformPage && (
+                <Link
+                  href="/dashboard"
+                  className="flex items-center space-x-4 p-3 rounded-2xl transition-all group hover:bg-white/10"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl 
+                    flex items-center justify-center text-white shadow-lg
+                    group-hover:scale-110 transition-transform">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                      <rect x="7" y="7" width="10" height="10" rx="1" ry="1" />
+                    </svg>
+                  </div>
+                  <span className="text-lg font-medium text-white">
+                    Dashboard
+                  </span>
+                </Link>
+              )}
+
+              {/* Rest of Menu Items */}
+              {menuItems.slice(1).map((item, index) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="flex items-center space-x-4 p-3 rounded-xl hover:bg-gray-50 transition-all group"
+                  className={`flex items-center space-x-4 p-3 rounded-2xl transition-all group ${
+                    pathname === item.href ? 'bg-blue-500/30 border border-blue-400/50' : 'hover:bg-white/10'
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
-                  <div className="w-12 h-12 bg-gray-100 border-2 border-gray-200 rounded-xl flex items-center justify-center text-gray-600 group-hover:bg-blue-500 group-hover:border-blue-500 group-hover:text-white transition-all">
+                  <div className={`w-12 h-12 bg-gradient-to-br ${item.gradient} rounded-2xl 
+                    flex items-center justify-center text-white shadow-lg
+                    group-hover:scale-110 transition-transform`}>
                     {item.icon}
                   </div>
-                  <span className="text-lg font-medium text-gray-700 group-hover:text-blue-600 transition-colors">
+                  <span className="text-lg font-medium text-white">
                     {item.name}
                   </span>
                 </Link>
               ))}
-              
-              <div className="border-t border-gray-200 my-6" />
-              
-              {/* Auth Buttons */}
-              <Link
-                href="/auth/login"
-                className="flex items-center space-x-4 p-3 rounded-xl hover:bg-blue-50 transition-all group"
-                onClick={() => setIsOpen(false)}
-              >
-                <div className="w-12 h-12 bg-blue-100 border-2 border-blue-200 rounded-xl flex items-center justify-center text-blue-600 group-hover:bg-blue-500 group-hover:border-blue-500 group-hover:text-white transition-all">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" />
-                    <polyline points="10,17 15,12 10,7" />
-                    <line x1="15" y1="12" x2="3" y2="12" />
-                  </svg>
+            </div>
+            
+            {/* Bottom Auth Section */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-white/5 backdrop-blur-xl border-t border-white/10">
+              {isAuthenticated ? (
+                <div className="space-y-2">
+                  <p className="text-white/70 text-sm text-center mb-4">Profile + Dashboard + Logout</p>
+                  <Link
+                    href="/profile"
+                    className="flex items-center space-x-4 p-3 rounded-2xl bg-blue-500/20 
+                      hover:bg-blue-500/30 transition-all group"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl 
+                      flex items-center justify-center text-white shadow-lg">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                    </div>
+                    <span className="text-white font-medium">Profile</span>
+                  </Link>
+                  <button className="w-full flex items-center space-x-4 p-3 rounded-2xl bg-red-500/20 
+                    hover:bg-red-500/30 transition-all group">
+                    <div className="w-10 h-10 bg-gradient-to-br from-red-400 to-red-600 rounded-xl 
+                      flex items-center justify-center text-white shadow-lg">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+                        <polyline points="16,17 21,12 16,7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                      </svg>
+                    </div>
+                    <span className="text-white font-medium">Logout</span>
+                  </button>
                 </div>
-                <span className="text-lg font-medium text-gray-700 group-hover:text-blue-600 transition-colors">
-                  Login
-                </span>
-              </Link>
-              
-              <Link
-                href="/auth/signup"
-                className="flex items-center space-x-4 p-3 rounded-xl hover:bg-green-50 transition-all group"
-                onClick={() => setIsOpen(false)}
-              >
-                <div className="w-12 h-12 bg-green-100 border-2 border-green-200 rounded-xl flex items-center justify-center text-green-600 group-hover:bg-green-500 group-hover:border-green-500 group-hover:text-white transition-all">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <line x1="19" y1="8" x2="19" y2="14" />
-                    <line x1="22" y1="11" x2="16" y2="11" />
-                  </svg>
+              ) : (
+                <div className="space-y-2">
+                  <Link
+                    href="/auth/login"
+                    className="flex items-center space-x-4 p-3 rounded-2xl bg-blue-500/20 
+                      hover:bg-blue-500/30 transition-all group"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl 
+                      flex items-center justify-center text-white shadow-lg">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" />
+                        <polyline points="10,17 15,12 10,7" />
+                        <line x1="15" y1="12" x2="3" y2="12" />
+                      </svg>
+                    </div>
+                    <span className="text-white font-medium">Login</span>
+                  </Link>
+                  
+                  <Link
+                    href="/auth/signup"
+                    className="flex items-center space-x-4 p-3 rounded-2xl bg-green-500/20 
+                      hover:bg-green-500/30 transition-all group"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-xl 
+                      flex items-center justify-center text-white shadow-lg">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <line x1="19" y1="8" x2="19" y2="14" />
+                        <line x1="22" y1="11" x2="16" y2="11" />
+                      </svg>
+                    </div>
+                    <span className="text-white font-medium">Sign Up</span>
+                  </Link>
                 </div>
-                <span className="text-lg font-medium text-gray-700 group-hover:text-green-600 transition-colors">
-                  Sign Up
-                </span>
-              </Link>
+              )}
             </div>
           </div>
         </>
