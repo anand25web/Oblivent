@@ -61,10 +61,9 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2">
           <img 
-            src="/oblivent-logo.png" 
+            src="/oblivent-logo-new.png" 
             alt="Oblivent Logo" 
-            className="h-8 w-auto mix-blend-screen opacity-95"
-            style={{ filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.3))' }}
+            className="h-9 w-auto"
           />
         </Link>
 
