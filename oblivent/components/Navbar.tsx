@@ -1,3 +1,35 @@
+
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const isAuthenticated = false; // Replace with actual auth logic
+  const isPlatformPage = pathname.startsWith('/platforms/');
+
+  const menuItems = [
+    { 
+      name: "Home", 
+      href: "/",
+      gradient: "from-blue-500 to-indigo-600",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+          <polyline points="9,22 9,12 15,12 15,22" />
+        </svg>
+      )
+    },
+    { 
+      name: "E-Learning Platform", 
+      href: "/platforms/elearning",
+      gradient: "from-emerald-400 to-teal-500",
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" />
           <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z" />
         </svg>
