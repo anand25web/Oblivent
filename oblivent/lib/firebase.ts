@@ -17,4 +17,4 @@ export function initializeFirebase(config: FirebaseConfig) {
 }
 
 // Placeholder for Firebase app instance
-export let firebaseApp: any = null;
+export const firebaseApp: unknown = null;

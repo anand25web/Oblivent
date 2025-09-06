@@ -23,17 +23,17 @@ export interface SubscriptionPlan {
 }
 
 // Mock payment functions - replace with Stripe or other payment provider
-export async function createPaymentIntent(amount: number, currency: string = 'usd'): Promise<PaymentIntent> {
+export async function createPaymentIntent(amount: number, _currency: string = 'usd'): Promise<PaymentIntent> {
   // This would integrate with Stripe or another payment processor
   throw new Error('Payment processing not yet implemented');
 }
 
-export async function confirmPayment(paymentIntentId: string): Promise<PaymentIntent> {
+export async function confirmPayment(_paymentIntentId: string): Promise<PaymentIntent> {
   // Confirm payment with payment processor
   throw new Error('Payment confirmation not yet implemented');
 }
 
-export async function createSubscription(planId: string, paymentMethodId: string): Promise<any> {
+export async function createSubscription(_planId: string, _paymentMethodId: string): Promise<unknown> {
   // Create subscription with payment processor
   throw new Error('Subscription creation not yet implemented');
 }

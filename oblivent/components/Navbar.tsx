@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
@@ -216,9 +217,11 @@ export default function Navbar() {
 
         {/* Logo - Right Side */}
         <Link href="/" className="flex items-center space-x-2">
-          <img 
+          <Image 
             src="/oblivent-logo-new.png" 
             alt="Oblivent Logo" 
+            width={36}
+            height={36}
             className="h-9 w-auto"
           />
         </Link>

@@ -14,12 +14,12 @@ export interface AuthState {
 }
 
 // Mock authentication functions - replace with actual implementation
-export async function signIn(email: string, password: string): Promise<User> {
+export async function signIn(_email: string, _password: string): Promise<User> {
   // This would integrate with Firebase Auth or another auth provider
   throw new Error('Authentication not yet implemented');
 }
 
-export async function signUp(email: string, password: string, name: string): Promise<User> {
+export async function signUp(_email: string, _password: string, _name: string): Promise<User> {
   // This would integrate with Firebase Auth or another auth provider
   throw new Error('Sign up not yet implemented');
 }
