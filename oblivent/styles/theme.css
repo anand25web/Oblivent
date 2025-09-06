@@ -1,0 +1,50 @@
+/* Theme-specific styles for different platforms */
+
+/* E-learning theme colors */
+.theme-elearning {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-light: #dbeafe;
+}
+
+/* Mart theme colors */
+.theme-mart {
+  --primary-color: #16a34a;
+  --primary-hover: #15803d;
+  --primary-light: #dcfce7;
+}
+
+/* Agency theme colors */
+.theme-agency {
+  --primary-color: #9333ea;
+  --primary-hover: #7c3aed;
+  --primary-light: #f3e8ff;
+}
+
+/* Software theme colors */
+.theme-software {
+  --primary-color: #374151;
+  --primary-hover: #1f2937;
+  --primary-light: #f9fafb;
+}
+
+/* Common theme utilities */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.card-primary {
+  background-color: var(--primary-light);
+  border: 1px solid var(--primary-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
