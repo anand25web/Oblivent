@@ -1,5 +1,4 @@
-// Firebase configuration and initialization
-// This file will contain Firebase setup when needed
+import { initializeApp, FirebaseApp } from 'firebase/app';
 
 export interface FirebaseConfig {
   apiKey: string;
@@ -10,11 +9,19 @@ export interface FirebaseConfig {
   appId: string;
 }
 
-// Initialize Firebase when config is provided
-export function initializeFirebase(config: FirebaseConfig) {
-  // Firebase initialization logic will go here
-  console.log('Firebase initialized with config:', config);
+// Firebase app instance (initialized later)
+let firebaseApp: FirebaseApp | null = null;
+
+/**
+ * Initialize Firebase with the provided config.
+ * If already initialized, returns the existing app.
+ */
+export function initializeFirebase(config: FirebaseConfig): FirebaseApp {
+  if (!firebaseApp) {
+    firebaseApp = initializeApp(config);
+    console.log('Firebase initialized with config:', config);
+  }
+  return firebaseApp;
 }
 
-// Placeholder for Firebase app instance
-export const firebaseApp: unknown = null;
+export { firebaseApp };
