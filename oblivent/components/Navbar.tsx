@@ -59,8 +59,12 @@ export default function Navbar() {
         px-6 py-3 flex items-center justify-between">
         
         {/* Logo */}
-        <Link href="/" className="text-2xl font-extrabold text-white tracking-wide">
-          Oblivent
+        <Link href="/" className="flex items-center space-x-2">
+          <img 
+            src="/oblivent-logo.png" 
+            alt="Oblivent Logo" 
+            className="h-8 w-auto opacity-90"
+          />
         </Link>
 
         {/* Desktop Menu */}
@@ -115,58 +119,83 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Sidebar */}
       {isOpen && (
-        <div className="absolute top-20 w-[92%] mx-6 bg-blue-950/50 
-          backdrop-blur-xl border border-blue-800/30 shadow-lg 
-          rounded-2xl p-6 flex flex-col space-y-4 md:hidden">
-          {menuItems.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="flex items-center space-x-3 p-3 rounded-xl text-white font-medium hover:text-blue-400 hover:bg-white/10 transition-all"
-              onClick={() => setIsOpen(false)}
-            >
-              <div className="w-12 h-12 bg-blue-600/30 rounded-xl flex items-center justify-center">
-                {item.icon}
+        <>
+          {/* Overlay */}
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden" onClick={() => setIsOpen(false)} />
+          
+          {/* Sidebar */}
+          <div className="fixed left-0 top-0 h-full w-80 bg-gray-100 shadow-2xl z-50 md:hidden flex">
+            {/* Icons Column */}
+            <div className="w-20 bg-white/90 flex flex-col items-center py-6 space-y-4">
+              {menuItems.map((item, index) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="w-14 h-14 bg-gray-200 rounded-2xl flex items-center justify-center text-gray-600 hover:bg-blue-500 hover:text-white transition-all"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.icon}
+                </Link>
+              ))}
+              
+              <div className="border-t border-gray-300 w-12 my-4" />
+              
+              {/* Login Icon */}
+              <Link
+                href="/auth/login"
+                className="w-14 h-14 bg-blue-500 rounded-2xl flex items-center justify-center text-white hover:bg-blue-600 transition-all"
+                onClick={() => setIsOpen(false)}
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" />
+                  <polyline points="10,17 15,12 10,7" />
+                  <line x1="15" y1="12" x2="3" y2="12" />
+                </svg>
+              </Link>
+            </div>
+            
+            {/* Content Area */}
+            <div className="flex-1 bg-gray-50 flex flex-col">
+              {/* Header */}
+              <div className="p-6 border-b border-gray-200">
+                <h2 className="text-2xl font-bold text-gray-800">Menu</h2>
               </div>
-              <span className="text-lg">{item.name}</span>
-            </Link>
-          ))}
-          <hr className="border-blue-800/40 my-4" />
-          
-          {/* Auth Buttons */}
-          <Link
-            href="/auth/login"
-            className="flex items-center space-x-3 p-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all"
-            onClick={() => setIsOpen(false)}
-          >
-            <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" />
-                <polyline points="10,17 15,12 10,7" />
-                <line x1="15" y1="12" x2="3" y2="12" />
-              </svg>
+              
+              {/* Menu Items */}
+              <div className="flex-1 p-6">
+                {menuItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="block py-4 text-lg text-gray-700 hover:text-blue-600 font-medium border-b border-gray-200 last:border-b-0 transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+                
+                <div className="mt-8 space-y-4">
+                  <Link
+                    href="/auth/login"
+                    className="block w-full p-4 text-center bg-blue-500 text-white rounded-xl font-semibold hover:bg-blue-600 transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    href="/auth/signup"
+                    className="block w-full p-4 text-center bg-gray-200 text-gray-800 rounded-xl font-semibold hover:bg-gray-300 transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Sign Up
+                  </Link>
+                </div>
+              </div>
             </div>
-            <span className="text-lg">Login</span>
-          </Link>
-          
-          <Link
-            href="/auth/signup"
-            className="flex items-center space-x-3 p-3 rounded-xl bg-white/20 hover:bg-white/30 text-white font-semibold transition-all"
-            onClick={() => setIsOpen(false)}
-          >
-            <div className="w-12 h-12 bg-green-600/30 rounded-xl flex items-center justify-center">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <line x1="19" y1="8" x2="19" y2="14" />
-                <line x1="22" y1="11" x2="16" y2="11" />
-              </svg>
-            </div>
-            <span className="text-lg">Sign Up</span>
-          </Link>
-        </div>
+          </div>
+        </>
       )}
     </nav>
   );
